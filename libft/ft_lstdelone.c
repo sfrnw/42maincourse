@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:02:43 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/31 14:55:24 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:16:28 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 // 		second_to_last->next = NULL;
 
 // 	printf("Deleting node with content '%s'\n",
-//				(char *)node_to_delete->content);
+// 				(char *)node_to_delete->content);
 // 	ft_lstdelone(node_to_delete, del_content);
 
 // 	printf("List after deletion: ");

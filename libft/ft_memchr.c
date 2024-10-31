@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:00:00 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 14:12:35 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:53:59 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 // #include <string.h>
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t size)
 {
 	unsigned char	*p;
 	size_t			i;
 
 	p = (unsigned char *)s;
 	i = 0;
-	while (i < n)
+	while (i < size)
 	{
 		if (p[i] == (unsigned char)c)
 			return (&p[i]);

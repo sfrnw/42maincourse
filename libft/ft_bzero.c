@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:00:00 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 14:14:54 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:53:14 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 // #include <strings.h>
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t size)
 {
 	unsigned char	*p;
 	size_t			i;
 
 	p = (unsigned char *)s;
 	i = 0;
-	while (i < n)
+	while (i < size)
 	{
 		p[i] = 0;
 		i++;

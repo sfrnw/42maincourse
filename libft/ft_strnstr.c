@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:00:00 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 14:13:54 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:55:21 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // #include <bsd/string.h>  
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t size)
 {
 	size_t	i;
 	size_t	j;
@@ -23,10 +23,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (!*little)
 		return ((char *)big);
 	i = 0;
-	while (big[i] && i < len)
+	while (big[i] && i < size)
 	{
 		j = 0;
-		while (big[i + j] && little[j] && i + j < len
+		while (big[i + j] && little[j] && i + j < size
 			&& big[i + j] == little[j])
 			j++;
 		if (!little[j])
