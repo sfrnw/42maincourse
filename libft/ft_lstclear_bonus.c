@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 15:02:47 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 17:00:12 by asafrono         ###   ########.fr       */
+/*   Created: 2024/10/30 15:02:30 by asafrono          #+#    #+#             */
+/*   Updated: 2024/11/04 14:09:55 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,22 @@
 // 	struct s_list	*next;
 // }	t_list;
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	while (lst)
+	t_list	*current;
+	t_list	*next;
+
+	if (lst && del)
 	{
-		f(lst->content);
-		lst = lst->next;
+		current = *lst;
+		while (current)
+		{
+			next = current->next;
+			del(current->content);
+			free(current);
+			current = next;
+		}
+		*lst = NULL;
 	}
 }
 
@@ -71,19 +81,9 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 // 	printf("NULL\n");
 // }
 
-// static void	to_uppercase(void *content)
+// static void	del_content(void *content)
 // {
-// 	char	*str;
-// 	int		i;
-
-// 	str = (char *)content;
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] >= 'a' && str[i] <= 'z')
-// 			str[i] = str[i] - 32;
-// 		i++;
-// 	}
+// 	free(content);
 // }
 
 // int	main(void)
@@ -95,9 +95,9 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 
 // 	list = NULL;
 
-// 	str1 = strdup("hello");
-// 	str2 = strdup("world");
-// 	str3 = strdup("42");
+// 	str1 = strdup("Hello");
+// 	str2 = strdup("World");
+// 	str3 = strdup("!");
 
 // 	ft_lstadd_back(&list, ft_lstnew(str1));
 // 	ft_lstadd_back(&list, ft_lstnew(str2));
@@ -106,19 +106,14 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 // 	printf("Initial list: ");
 // 	print_list(list);
 
-// 	printf("Applying to_uppercase function...\n");
-// 	ft_lstiter(list, to_uppercase);
+// 	printf("Clearing the list...\n");
+// 	ft_lstclear(&list, del_content);
 
-// 	printf("List after applying function: ");
-// 	print_list(list);
-
-// 	while (list)
-// 	{
-// 		t_list *temp = list;
-// 		list = list->next;
-// 		free(temp->content);
-// 		free(temp);
-// 	}
+// 	printf("List after clearing: ");
+// 	if (list == NULL)
+// 		printf("NULL\n");
+// 	else
+// 		print_list(list);
 
 // 	return (0);
 // }

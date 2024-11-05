@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 15:02:49 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 16:59:26 by asafrono         ###   ########.fr       */
+/*   Created: 2024/10/30 15:02:38 by asafrono          #+#    #+#             */
+/*   Updated: 2024/11/04 14:09:55 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// #include <stdlib.h>
-// #include <stdio.h>
+// # include <stdlib.h>
+// # include <stdio.h>
 
 // typedef struct s_list
 // {
@@ -21,16 +21,7 @@
 // 	struct s_list	*next;
 // }	t_list;
 
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-// static t_list	*ft_lstnew(void *content)
+// t_list	*ft_lstnew(void *content)
 // {
 // 	t_list	*new_node;
 
@@ -42,23 +33,14 @@ t_list	*ft_lstlast(t_list *lst)
 // 	return (new_node);
 // }
 
-// static void	ft_lstadd_back(t_list **lst, t_list *new)
-// {
-// 	t_list	*last;
-
-// 	if (lst)
-// 	{
-// 		if (*lst)
-// 		{
-// 			last = *lst;
-// 			while (last->next)
-// 				last = last->next;
-// 			last->next = new;
-// 		}
-// 		else
-// 			*lst = new;
-// 	}
-// }
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (lst && new)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
+}
 
 // static void	print_list(t_list *lst)
 // {
@@ -74,35 +56,26 @@ t_list	*ft_lstlast(t_list *lst)
 // {
 // 	t_list	*list;
 // 	t_list	*new_node;
-// 	t_list	*last_node;
 
 // 	list = NULL;
 
 // 	printf("Initial list: ");
 // 	print_list(list);
-// 	last_node = ft_lstlast(list);
-// 	printf("Last node: %s\n", last_node ? (char *)last_node->content : "NULL");
-
-// 	new_node = ft_lstnew("Hello");
-// 	ft_lstadd_back(&list, new_node);
-// 	printf("After adding 'Hello': ");
-// 	print_list(list);
-// 	last_node = ft_lstlast(list);
-// 	printf("Last node: %s\n", (char *)last_node->content);
 
 // 	new_node = ft_lstnew("World");
-// 	ft_lstadd_back(&list, new_node);
+// 	ft_lstadd_front(&list, new_node);
 // 	printf("After adding 'World': ");
 // 	print_list(list);
-// 	last_node = ft_lstlast(list);
-// 	printf("Last node: %s\n", (char *)last_node->content);
+
+// 	new_node = ft_lstnew("Hello");
+// 	ft_lstadd_front(&list, new_node);
+// 	printf("After adding 'Hello': ");
+// 	print_list(list);
 
 // 	new_node = ft_lstnew("!");
-// 	ft_lstadd_back(&list, new_node);
+// 	ft_lstadd_front(&list, new_node);
 // 	printf("After adding '!': ");
 // 	print_list(list);
-// 	last_node = ft_lstlast(list);
-// 	printf("Last node: %s\n", (char *)last_node->content);
 
 // 	while (list)
 // 	{

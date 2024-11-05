@@ -6,13 +6,13 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:00:00 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 14:13:58 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:09:37 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <string.h>
-#include "libft.h"
+#include <stdio.h>
+#include <string.h>
+// #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {

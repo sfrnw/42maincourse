@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:00:00 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/31 17:55:57 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:10:00 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
-	size_t 	total_size;
+	size_t	total_size;
 
 	if (nmemb > 0 && (size > ((size_t) - 1) / nmemb))
 		return (NULL);

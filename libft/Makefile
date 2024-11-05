@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/30 11:38:14 by asafrono          #+#    #+#              #
+#    Updated: 2024/11/04 14:28:44 by asafrono         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -14,9 +26,9 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 
 OBJS = $(SRCS:.c=.o)
 
-BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-             ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-             ft_lstmap.c
+BONUS_SRCS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
+             ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
+             ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
@@ -25,18 +37,23 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
+bonus: .bonus
+
+.bonus:$(OBJS) $(BONUS_OBJS)
+	$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
+	touch .bonus
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS) $(BONUS_OBJS)
+	$(RM) .bonus
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-bonus: $(OBJS) $(BONUS_OBJS)
-	$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
-
 .PHONY: all clean fclean re bonus
+

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:43:51 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 14:26:48 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:09:39 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 }
 
 // // Example functions to use with ft_strmapi
-// static char	to_uppercase(unsigned int i, char c)
+// static char	to_uppercase(unsigned intmak i, char c)
 // {
 // 	(void)i;  // Unused parameter
 // 	if (c >= 'a' && c <= 'z')

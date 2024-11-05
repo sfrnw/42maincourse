@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 15:02:30 by asafrono          #+#    #+#             */
-/*   Updated: 2024/10/30 16:59:59 by asafrono         ###   ########.fr       */
+/*   Created: 2024/10/30 15:02:49 by asafrono          #+#    #+#             */
+/*   Updated: 2024/11/04 14:09:53 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 // #include <stdlib.h>
 // #include <stdio.h>
-// #include <string.h>
 
 // typedef struct s_list
 // {
@@ -22,23 +21,13 @@
 // 	struct s_list	*next;
 // }	t_list;
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*current;
-	t_list	*next;
-
-	if (lst && del)
-	{
-		current = *lst;
-		while (current)
-		{
-			next = current->next;
-			del(current->content);
-			free(current);
-			current = next;
-		}
-		*lst = NULL;
-	}
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
 // static t_list	*ft_lstnew(void *content)
@@ -81,39 +70,46 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 // 	printf("NULL\n");
 // }
 
-// static void	del_content(void *content)
-// {
-// 	free(content);
-// }
-
 // int	main(void)
 // {
 // 	t_list	*list;
-// 	char	*str1;
-// 	char	*str2;
-// 	char	*str3;
+// 	t_list	*new_node;
+// 	t_list	*last_node;
 
 // 	list = NULL;
 
-// 	str1 = strdup("Hello");
-// 	str2 = strdup("World");
-// 	str3 = strdup("!");
-
-// 	ft_lstadd_back(&list, ft_lstnew(str1));
-// 	ft_lstadd_back(&list, ft_lstnew(str2));
-// 	ft_lstadd_back(&list, ft_lstnew(str3));
-
 // 	printf("Initial list: ");
 // 	print_list(list);
+// 	last_node = ft_lstlast(list);
+// 	printf("Last node: %s\n", last_node ? (char *)last_node->content : "NULL");
 
-// 	printf("Clearing the list...\n");
-// 	ft_lstclear(&list, del_content);
+// 	new_node = ft_lstnew("Hello");
+// 	ft_lstadd_back(&list, new_node);
+// 	printf("After adding 'Hello': ");
+// 	print_list(list);
+// 	last_node = ft_lstlast(list);
+// 	printf("Last node: %s\n", (char *)last_node->content);
 
-// 	printf("List after clearing: ");
-// 	if (list == NULL)
-// 		printf("NULL\n");
-// 	else
-// 		print_list(list);
+// 	new_node = ft_lstnew("World");
+// 	ft_lstadd_back(&list, new_node);
+// 	printf("After adding 'World': ");
+// 	print_list(list);
+// 	last_node = ft_lstlast(list);
+// 	printf("Last node: %s\n", (char *)last_node->content);
+
+// 	new_node = ft_lstnew("!");
+// 	ft_lstadd_back(&list, new_node);
+// 	printf("After adding '!': ");
+// 	print_list(list);
+// 	last_node = ft_lstlast(list);
+// 	printf("Last node: %s\n", (char *)last_node->content);
+
+// 	while (list)
+// 	{
+// 		t_list *temp = list;
+// 		list = list->next;
+// 		free(temp);
+// 	}
 
 // 	return (0);
 // }
