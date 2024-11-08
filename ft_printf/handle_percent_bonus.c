@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_pointer.c                                   :+:      :+:    :+:   */
+/*   handle_percent_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 17:41:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/08 13:40:04 by asafrono         ###   ########.fr       */
+/*   Created: 2024/11/04 17:41:06 by asafrono          #+#    #+#             */
+/*   Updated: 2024/11/07 17:23:29 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_pointer(va_list args)
+int	handle_percent_bonus(t_flags *flags)
 {
-	void	*ptr;
 	int		count;
+	char	pad_char;
 
-	ptr = va_arg(args, void *);
 	count = 0;
-	if (ptr == NULL)
-		return (ft_putstr("(nil)"));
-	count += ft_putstr("0x");
-	count += ft_putnbr_base((unsigned long long)ptr, "0123456789abcdef");
+	pad_char = ' ';
+	if (flags->zero)
+		pad_char = '0';
+	if (!flags->minus && flags->width > 1)
+		count += print_padding(flags->width - 1, pad_char);
+	ft_putchar_fd('%', 1);
+	count++;
+	if (flags->minus && flags->width > 1)
+		count += print_padding(flags->width - 1, ' ');
 	return (count);
 }
+
+// int	handle_percent(void)
+// {
+// 	return (ft_putchar('%'));
+// }

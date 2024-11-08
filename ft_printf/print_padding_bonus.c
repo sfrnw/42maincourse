@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_string.c                                    :+:      :+:    :+:   */
+/*   print_padding.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 17:41:11 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/08 13:38:53 by asafrono         ###   ########.fr       */
+/*   Created: 2024/11/05 18:26:08 by asafrono          #+#    #+#             */
+/*   Updated: 2024/11/06 15:51:45 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_string(va_list args)
+int	print_padding(int width, char pad_char)
 {
-	char	*str;
+	int	count;
 
-	str = va_arg(args, char *);
-	return (ft_putstr(str));
+	count = 0;
+	while (width > 0)
+	{
+		ft_putchar_fd(pad_char, 1);
+		count++;
+		width--;
+	}
+	return (count);
 }

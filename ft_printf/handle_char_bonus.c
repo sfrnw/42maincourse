@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_string.c                                    :+:      :+:    :+:   */
+/*   handle_char_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 17:41:11 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/08 13:38:53 by asafrono         ###   ########.fr       */
+/*   Created: 2024/11/04 17:40:49 by asafrono          #+#    #+#             */
+/*   Updated: 2024/11/07 17:23:33 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_string(va_list args)
+int	handle_char_bonus(va_list args, t_flags *flags)
 {
-	char	*str;
+	char	c;
+	int		count;
 
-	str = va_arg(args, char *);
-	return (ft_putstr(str));
+	c = va_arg(args, int);
+	count = 0;
+	if (!flags->minus && flags->width > 1)
+		count += print_padding(flags->width - 1, ' ');
+	ft_putchar_fd(c, 1);
+	count++;
+	if (flags->minus && flags->width > 1)
+		count += print_padding(flags->width - 1, ' ');
+	return (count);
 }

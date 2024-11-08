@@ -6,27 +6,11 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:54:18 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/05 12:28:25 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/08 13:05:24 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// #include <stdarg.h>
-// #include <stdio.h>
-
-// int	handle_char(va_list args);
-// int	handle_string(va_list args);
-// int	handle_pointer(va_list args);
-// int	handle_int(va_list args);
-// int	handle_unsigned(va_list args);
-// int	handle_hex_lower(va_list args);
-// int	handle_hex_upper(va_list args);
-// int	handle_percent(void);
-// int	handle_format(char specifier, va_list args);
-// int	ft_putchar(char c);
-// int	ft_putstr(char *str);
-// int	ft_putnbr(int n);
-// int	ft_putnbr_base(unsigned long long n, char *base);
 
 static int	process_format(va_list args, const char *format)
 {
@@ -43,7 +27,10 @@ static int	process_format(va_list args, const char *format)
 			count += handle_format(*format, args);
 		}
 		else
-			count += ft_putchar(*format);
+		{
+			ft_putchar_fd(*format, 1);
+			count++;
+		}
 		format++;
 	}
 	return (count);

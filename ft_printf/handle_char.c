@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:40:49 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/04 17:58:58 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:45:30 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ int	handle_char(va_list args)
 	char	c;
 
 	c = va_arg(args, int);
-	return (ft_putchar(c));
+	ft_putchar_fd(c, 1);
+	return (1);
 }
