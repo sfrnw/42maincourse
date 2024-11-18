@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:02 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/16 15:56:05 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:14:33 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+// # include <fcntl.h>
 // int	main(void)
 // {
 // 	int		fd1;

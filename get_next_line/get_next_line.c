@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:02 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/18 11:40:29 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:13:52 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,37 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int	main(void)
+// # include <fcntl.h>
+// int	main(int argc, char **argv)
 // {
 // 	int		fd;
 // 	char	*line;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd == -1)
+// 	if (argc > 1)
 // 	{
-// 		printf("Error opening file\n");
-// 		return (1);
+// 		fd = open(argv[1], O_RDONLY);
+// 		if (fd == -1)
+// 		{
+// 			printf("Error opening file\n");
+// 			return (1);
+// 		}
 // 	}
-// 	line = get_next_line(fd);
-// 	while (line != NULL)
+// 	else
 // 	{
-// 		printf("%s\n", line);
+// 		fd = 0;
+// 		printf("Reading from standard input. Enter text (Ctrl+D to end):\n");
+// 	}
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
 // 		free(line);
-// 		line = get_next_line(fd);
 // 	}
-// 	close(fd);
+// 	if (fd != 0)
+// 		close(fd);
 // 	return (0);
 // }
-// cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c
-// get_next_line_utils.c && ./a.out
+
+// cc -Wall -Wextra -Werror -D BUFFER_SIZE=42
+// get_next_line.c get_next_line_utils.c -o gnl
+// ./gnl test.txt
+// ./gnl

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:05 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/18 11:26:21 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:14:37 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <fcntl.h>
 
 # define MAX_FD 1024
 
@@ -24,9 +23,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
-size_t		ft_strlen(const char *str);
-char		*ft_strchr(const char *s, int c);
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin_and_free(char const *s1, char const *s2);
 char		*get_next_line(int fd);
 char		*ft_read_to_leftover(int fd, char *leftover);
 char		*ft_get_line(char *leftover);

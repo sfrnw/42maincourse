@@ -6,13 +6,13 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:00 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/18 11:42:47 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:14:01 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_and_free(char const *s1, char const *s2)
 {
 	char	*result;
 	int		i;
@@ -55,7 +55,7 @@ char	*ft_read_to_leftover(int fd, char *leftover)
 		if (read_bytes <= 0)
 			break ;
 		buffer[read_bytes] = '\0';
-		leftover = ft_strjoin(leftover, buffer);
+		leftover = ft_strjoin_and_free(leftover, buffer);
 		if (!leftover)
 			return (free (buffer), NULL);
 		i = 0;
