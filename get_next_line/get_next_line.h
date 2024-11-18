@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:05 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/12 16:44:23 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:28:12 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 #  define BUFFER_SIZE 42
 # endif
 
-size_t		ft_strlen(const char *str);
-char		*ft_strchr(const char *s, int c);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*get_next_line(int fd);
+char		*ft_read_to_leftover(int fd, char *leftover);
+char		*ft_get_line(char *leftover);
+char		*ft_new_leftover(char *leftover);
 
 #endif

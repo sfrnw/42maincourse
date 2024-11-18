@@ -6,92 +6,11 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:02 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/12 16:44:39 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:56:05 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-static char	*ft_read_to_leftover(int fd, char *leftover)
-{
-	char	*buffer;
-	int		read_bytes;
-
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	read_bytes = 1;
-	while (!leftover || ((!ft_strchr(leftover, '\n')) && (read_bytes != 0)))
-	{
-		read_bytes = read (fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free (buffer);
-			if (leftover)
-				free(leftover);
-			return (NULL);
-		}
-		buffer[read_bytes] = '\0';
-		leftover = ft_strjoin(leftover, buffer);
-		if (!leftover)
-			return (NULL);
-	}
-	free (buffer);
-	return (leftover);
-}
-
-static char	*ft_get_line(char *leftover)
-{
-	int		i;
-	char	*line;
-
-	i = 0;
-	if (!leftover[i])
-		return (NULL);
-	while (leftover[i] && leftover[i] != '\n')
-		i++;
-	if (leftover[i] == '\n')
-		i++;
-	line = (char *)malloc(sizeof(char) * (i + 1));
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (leftover[i] && leftover[i] != '\n')
-	{
-		line[i] = leftover[i];
-		i++;
-	}
-	if (leftover[i] == '\n')
-		line[i++] = '\n';
-	line[i] = '\0';
-	return (line);
-}
-
-static char	*ft_new_leftover(char *leftover)
-{
-	int		i;
-	int		j;
-	char	*new_leftover;
-
-	i = 0;
-	while (leftover[i] && leftover[i] != '\n')
-		i++;
-	if (!leftover[i])
-	{
-		free (leftover);
-		return (NULL);
-	}
-	new_leftover = (char *)malloc(sizeof(char) * (ft_strlen(leftover) - i + 1));
-	if (!new_leftover)
-		return (NULL);
-	i++;
-	j = 0;
-	while (leftover[i])
-		new_leftover[j++] = leftover[i++];
-	new_leftover[j] = '\0';
-	free (leftover);
-	return (new_leftover);
-}
 
 char	*get_next_line(int fd)
 {
@@ -104,6 +23,12 @@ char	*get_next_line(int fd)
 	if (!leftover[fd])
 		return (NULL);
 	line = ft_get_line(leftover[fd]);
+	if (!line)
+	{
+		free (leftover[fd]);
+		leftover[fd] = NULL;
+		return (NULL);
+	}
 	leftover[fd] = ft_new_leftover(leftover[fd]);
 	return (line);
 }
@@ -146,5 +71,5 @@ char	*get_next_line(int fd)
 // 	close(fd2);
 // 	return (0);
 // }
-// cc -Wall -Wextra -Werror get_next_line_bonus.c  
+// cc -Wall -Wextra -Werror get_next_line_bonus.c
 // get_next_line_utils_bonus.c -o gnl_test && ./gnl_test
