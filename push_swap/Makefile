@@ -6,7 +6,7 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2024/11/27 17:29:40 by asafrono         ###   ########.fr        #
+#    Updated: 2024/11/28 13:20:02 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM = rm -rf
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS = main.c push_swap.c sorting_algorythms.c stack_operations_a.c \
+SRCS = main.c push_swap.c bubble_sort.c quick_sort.c stack_operations_a.c \
        stack_operations_b.c stack_operations_ab.c stack_operations.c
 
 OBJ_DIR = obj

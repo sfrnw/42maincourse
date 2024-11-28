@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting_algorythms.c                               :+:      :+:    :+:   */
+/*   bubble_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:17:09 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/28 11:39:19 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/28 12:05:29 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /// bubble
-int	get_stack_size(t_node *stack)
-{
-	int		size;
-	t_node	*current;
-
-	size = 0;
-	current = stack;
-	while (current)
-	{
-		size++;
-		current = current->next;
-	}
-	return (size);
-}
 
 static void	bubble_pass(t_node **stack_a, int size, int *swapped)
 {
@@ -53,13 +39,11 @@ static void	bubble_pass(t_node **stack_a, int size, int *swapped)
 	}
 }
 
-void	bubble_sorting(t_node **stack_a, t_node **stack_b)
+void	bubble_sorting(t_node **stack_a, t_node **stack_b, int size)
 {
-	int	size;
 	int	swapped;
 
 	(void)stack_b;
-	size = get_stack_size(*stack_a);
 	while (1)
 	{
 		swapped = 0;

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:44:28 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/27 17:32:56 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:19:31 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	rotate(t_node **stack)
 	t_node	*first;
 	t_node	*last;
 
-	if (!*stack || !(*stack)->next)
+	if (!stack || !*stack || !(*stack)->next)
 		return ;
 	first = *stack;
 	last = *stack;
