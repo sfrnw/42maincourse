@@ -6,13 +6,13 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2024/11/28 13:20:02 by asafrono         ###   ########.fr        #
+#    Updated: 2024/11/28 16:07:57 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_DIR)
 RM = rm -rf
 
 LIBFT_DIR = ./libft
