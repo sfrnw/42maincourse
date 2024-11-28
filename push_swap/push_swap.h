@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/28 12:25:31 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:20:02 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int		get_pivot(t_node *stack, int size);
 void	sort_small(t_node **stack, int size);
 void	quick_sort(t_node **stack_a, t_node **stack_b, int size);
 int		partition(t_node **stack_a, t_node **stack_b, int pivot, int size);
+int 	get_nth_value(t_node *stack, int n);
 
 #endif
