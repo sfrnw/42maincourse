@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/28 18:20:02 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:48:21 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_node
 void	handle_error(t_node **stack);
 t_node	*parse_arguments(int argc, char **argv);
 void	free_stack(t_node **stack);
-int		is_sorted(t_node *stack);
+int		is_sorted(t_node *stack, int size);
 //stack operations
 t_node	*create_node(int value);
 void	push(t_node **stack, t_node *new_node);
@@ -52,10 +52,12 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 void	bubble_sorting(t_node **stack_a, t_node **stack_b, int size);
 int		get_stack_size(t_node *stack);
 // quick sorting
-int		get_pivot(t_node *stack, int size);
-void	sort_small(t_node **stack, int size);
-void	quick_sort(t_node **stack_a, t_node **stack_b, int size);
+void	quick_sorting(t_node **stack_a, t_node **stack_b, int size);
 int		partition(t_node **stack_a, t_node **stack_b, int pivot, int size);
-int 	get_nth_value(t_node *stack, int n);
+int		get_pivot(t_node **stack_a, t_node **stack_b, int size);
+void 	sort_small_3(t_node **stack);
+void 	sort_small(t_node **stack, int size);
+// int		get_median(t_node *stack, int size);
+int 	approximate_pivot(t_node *stack, int size);
 
 #endif

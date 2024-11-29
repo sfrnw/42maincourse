@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:44:28 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/28 17:52:12 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:07:59 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,13 @@ void	rotate(t_node **stack)
 {
 	t_node	*first;
 	t_node	*last;
-	int		count;
 
-	count = 0;
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
 	first = *stack;
 	last = *stack;
 	while (last->next)
-	{
 		last = last->next;
-		count++;
-	}
 	*stack = first->next;
 	last->next = first;
 	first->next = NULL;
@@ -74,11 +69,11 @@ void	reverse_rotate(t_node **stack)
 
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
-	// if ((*stack)->next->next == NULL)
-    // {
-    //     swap(stack);
-    //     return;
-    // }
+	if ((*stack)->next->next == NULL)
+    {
+        swap(stack);
+        return;
+    }
 	last = *stack;
 	second_last = NULL;
 	while (last->next)

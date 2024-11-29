@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:49:06 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/27 17:24:08 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:19:34 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,15 @@ t_node	*parse_arguments(int argc, char **argv)
 	return (stack_a);
 }
 
-int	is_sorted(t_node *stack)
+int is_sorted(t_node *stack, int size)
 {
-	t_node	*current;
-
-	if (!stack)
-		return (1);
-	current = stack;
-	while (current->next)
-	{
-		if (current->value > current->next->value)
-			return (0);
-		current = current->next;
-	}
-	return (1);
+    if (size <= 1)
+        return 1;
+    while (--size && stack && stack->next)
+    {
+        if (stack->value > stack->next->value)
+            return 0;
+        stack = stack->next;
+    }
+    return 1;
 }

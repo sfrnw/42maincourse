@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:21:15 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/28 17:52:04 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:21:15 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	pa(t_node **stack_a, t_node **stack_b)
 void	ra(t_node **stack_a)
 {
 	rotate(stack_a);
-	write(1, "pa\n", 3);
+	write(1, "ra\n", 3);
 }
 
 void	rra(t_node **stack_a)

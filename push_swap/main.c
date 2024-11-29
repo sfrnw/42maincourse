@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/28 16:18:53 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:52:44 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ int	main(int argc, char **argv)
 	ft_putendl_fd("Initial stack:", 1);
 	print_stack(stack_a);
 	size = get_stack_size(stack_a);
-	if (!is_sorted(stack_a))
-		quick_sort(&stack_a, &stack_b, size);
-	ft_putendl_fd("\nSorted stack:", 1);
+	if (!is_sorted(stack_a, size))
+//		sort_small(&stack_a, size);
+		quick_sorting(&stack_a, &stack_b, size);
+	ft_putendl_fd("\n Stack A:", 1);
 	print_stack(stack_a);
+	ft_putendl_fd("\n Stack B:", 1);
+	print_stack(stack_b);
 	free_stack (&stack_a);
 	free_stack (&stack_b);
 	return (0);
