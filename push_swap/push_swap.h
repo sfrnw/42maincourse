@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/29 18:48:21 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:58:26 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 void	bubble_sorting(t_node **stack_a, t_node **stack_b, int size);
 int		get_stack_size(t_node *stack);
 // quick sorting
-void	quick_sorting(t_node **stack_a, t_node **stack_b, int size);
-int		partition(t_node **stack_a, t_node **stack_b, int pivot, int size);
-int		get_pivot(t_node **stack_a, t_node **stack_b, int size);
-void 	sort_small_3(t_node **stack);
-void 	sort_small(t_node **stack, int size);
-// int		get_median(t_node *stack, int size);
-int 	approximate_pivot(t_node *stack, int size);
+void quick_sorting(t_node **stack_a, t_node **stack_b, int l, int r);
+int get_nth_value(t_node *stack, int n);
+int partition(t_node **stack_a, t_node **stack_b, int l, int r);
+void swap_elements(t_node **stack_a, t_node **stack_b, int index1, int index2);
+
+// sort small
+void sort_small_3(t_node **stack);
+void sort_small(t_node **stack, int size);
+
+//main
+void	print_stack(t_node *stack);
 
 #endif
