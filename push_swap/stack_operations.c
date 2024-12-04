@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:44:28 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/04 13:55:00 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:29:35 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	reverse_rotate(t_node **stack)
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
 	if ((*stack)->next->next == NULL)
-    {
-        swap(stack);
-        return;
-    }
+	{
+		swap(stack);
+		return ;
+	}
 	last = *stack;
 	second_last = NULL;
 	while (last->next)

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/04 15:46:50 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:33:30 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_stack(t_node *stack)
 
 int	get_stack_size(t_node *stack)
 {
-	int	size;
+	int		size;
 	t_node	*current;
 
 	size = 0;
@@ -47,32 +47,40 @@ int	main(int argc, char **argv)
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
-	int	size;
-	int move_count = 0;
+	int		size;
+	int		move_count;
 
+	move_count = 0;
 	if (argc < 2)
 		return (0);
 	stack_a = parse_arguments(argc, argv);
 	if (!stack_a)
 		return (1);
 	stack_b = NULL;
-	ft_putendl_fd("Initial stack:", 1);
-	print_stack(stack_a);
 	size = get_stack_size(stack_a);
 	if (!is_sorted(stack_a))
 	{
-		//radix_sorting(&stack_a, &stack_b, size, &move_count);
-		radix_sort(&stack_a, &stack_b, &move_count);
-		//	sort_small(&stack_a, size);
-		//  bubble_sorting(&stack_a, &stack_b, size);
+		if (size <= 3)
+			sort_small(&stack_a, size);
+		else
+			radix_sort(&stack_a, &stack_b, &move_count);
 	}
 	ft_putendl_fd("\n Stack A:", 1);
 	print_stack(stack_a);
 	ft_putendl_fd("\n Stack B:", 1);
 	print_stack(stack_b);
-	ft_putstr_fd("Total moves: ", 1);
-    ft_putnbr_fd(move_count, 1);
+	ft_putstr_fd("Total moves: \n", 1);
+	ft_putnbr_fd(move_count, 1);
 	free_stack (&stack_a);
 	free_stack (&stack_b);
 	return (0);
 }
+
+	// ft_putendl_fd("\n Stack A:", 1);
+	// print_stack(stack_a);
+	// ft_putendl_fd("\n Stack B:", 1);
+	// print_stack(stack_b);
+	// ft_putstr_fd("Total moves: \n", 1);
+	// ft_putnbr_fd(move_count, 1);
+
+//  bubble_sorting(&stack_a, &stack_b, size);
