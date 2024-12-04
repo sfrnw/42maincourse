@@ -1,182 +1,183 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 18:17:09 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/02 17:20:34 by asafrono         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   quick_sort.c                                       :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2024/11/27 18:17:09 by asafrono          #+#    #+#             */
+// /*   Updated: 2024/12/03 15:22:57 by asafrono         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 
-#include "push_swap.h"
+// #include "push_swap.h"
 
-void quick_sorting(t_node **stack_a, t_node **stack_b, int l, int r)
-{
-    int q;
-	printf("Quick sorting: l=%d, r=%d\n", l, r);
-    print_stack(*stack_a);
+// int get_nth_value(t_node *stack, int n)
+// {
+//     t_node *current;
+//     int i;
 
-    if (is_sorted(*stack_a, r - l))
-        return;
-    else if ( (r-l) <= 3)
-    {
-        sort_small(stack_a, r - l);
-        return;
-    }
+//     if (!stack)
+//         return (0);
 
-    if (r > l)
-    {
-        q = partition(stack_a, stack_b, l, r);
-        quick_sorting(stack_a, stack_b, l, q - 1);
-        quick_sorting(stack_a, stack_b, q + 1, r);
-    }
-}
+//     current = stack;
+//     i = 0;
+//     while (current && i < n)
+//     {
+//         current = current->next;
+//         i++;
+//     }
 
-int partition(t_node **stack_a, t_node **stack_b, int l, int r)
-{
-    int pivot;
-    int i;
-    int j;
-
-    pivot = get_nth_value(*stack_a, (l + r) / 2);
-    i = l;
-    j = r;
-	printf("Partition: l=%d, r=%d, pivot=%d\n", l, r, pivot);
-    while (i <= j)
-    {
-        while (i <= r && get_nth_value(*stack_a, i) < pivot)
-            i++;
-        while (j >= l && get_nth_value(*stack_a, j) > pivot)
-            j--;
-        if (i > j)
-            break;
-        swap_elements(stack_a, stack_b, i, j);
-		printf("i=%d, j=%d\n", i, j);
-        i++;
-        j--;
-    }
-    return (j);
-}
-void swap_elements(t_node **stack_a, t_node **stack_b, int index1, int index2)
-{
-    int size = get_stack_size(*stack_a);
-    int i;
-    
-    if (index1 == 0 && index2 == 1)
-    {
-        sa(stack_a);
-        return;
-    }
-    
-    // Move element at index1 to top of stack_a
-    i = 0;
-    while (i < index1)
-    {
-        ra(stack_a);
-        i++;
-    }
-    
-    // Push element to stack_b
-    pb(stack_a, stack_b);
-    
-    // Move element at index2 to top of stack_a
-    i = 0;
-    while (i < (index2 - index1))
-    {
-        ra(stack_a);
-        i++;
-    }
-    
-    // Swap elements
-    sa(stack_a);
-    pa(stack_b, stack_a);
-    
-    // Rotate stack back to original position
-    i = 0;
-    while (i < (size - index2))
-    {
-        rra(stack_a);
-        i++;
-    }
-}
-
-int get_nth_value(t_node *stack, int n)
-{
-    t_node *current;
-    int i;
-
-    if (!stack)
-        return (0);
-
-    current = stack;
-    i = 0;
-    while (current && i < n)
-    {
-        current = current->next;
-        i++;
-    }
-
-    if (current)
-        return (current->value);
-    return (0);
-}
-
-
-// void quick_sorting(t_node **stack_a, t_node **stack_b, int l, int r)
+//     if (current)
+//         return (current->value);
+//     return (0);
+// }
+// void quick_sort_a(t_node **stack_a, t_node **stack_b, int size)
 // {
 //     int pivot;
-//     int elements_to_push;
-//     int elements_pushed;
-//     int mid;
+//     int elements_less;
 
-//     printf("Quick sorting: l=%d, r=%d\n", l, r);
-//     print_stack(*stack_a);
-
-//     if (r - l <= 3)
+//     // Base cases
+//     if (size <= 1)
+//         return;
+//     if (size <= 3)
 //     {
-//         sort_small(stack_a, r - l);
+//         sort_small_a(stack_a, size);
+//         return;
+//     }
+//     if (is_sorted(*stack_a, size))
+//         return;
+
+//     // Find pivot and partition
+//     pivot = find_pivot(*stack_a, size);
+//     elements_less = partition_a(stack_a, stack_b, size, pivot);
+
+//     // Sort both partitions
+//     quick_sort_b(stack_a, stack_b, elements_less);        // Sort elements in B
+//     quick_sort_a(stack_a, stack_b, size - elements_less); // Sort remaining elements in A
+    
+//     // Merge the sorted partitions
+//     merge_from_b(stack_a, stack_b, elements_less);
+// }
+
+// void quick_sort_b(t_node **stack_a, t_node **stack_b, int size)
+// {
+//     if (size <= 1)
+//     {
+//         if (size == 1)
+//             pa(stack_a, stack_b);
+//         return;
+//     }
+//     if (size <= 3)
+//     {
+//         sort_small_b(stack_a, stack_b, size);
 //         return;
 //     }
 
-//     mid = l + (r - l) / 2;
-//     pivot = get_nth_value(*stack_a, mid);
-//     elements_to_push = r - l + 1;
-//     elements_pushed = 0;
+//     int pivot = find_pivot(*stack_b, size);
+//     int elements_greater = partition_b(stack_a, stack_b, size, pivot);
 
-//     while (elements_to_push > 0)
+//     quick_sort_a(stack_a, stack_b, elements_greater);
+//     quick_sort_b(stack_a, stack_b, size - elements_greater);
+// }
+
+// int partition_a(t_node **stack_a, t_node **stack_b, int size, int pivot)
+// {
+//     int elements_less = 0;
+//     int rotations = 0;
+//     int i;
+
+//     for (i = 0; i < size; i++)
 //     {
-//         if ((*stack_a)->value < pivot)
+//         if ((*stack_a)->value <= pivot)
 //         {
 //             pb(stack_a, stack_b);
-//             elements_pushed++;
+//             elements_less++;
 //         }
 //         else
 //         {
 //             ra(stack_a);
+//             rotations++;
 //         }
-//         elements_to_push--;
 //     }
 
-//     // Rotate back the elements that were not pushed
-//     elements_to_push = r - l + 1;
-//     while (elements_to_push > elements_pushed)
+//     // Restore the stack order
+//     i = 0;
+//     while (i < (size - elements_less))
 //     {
 //         rra(stack_a);
-//         elements_to_push--;
+//         i++;
 //     }
 
-//     // Push back elements from B to A
-//     while (elements_pushed > 0)
-//     {
-//         pa(stack_b, stack_a);
-//         elements_pushed--;
-//     }
-
-//     // Recursively sort the left and right partitions
-//     if (l < mid)
-//         quick_sorting(stack_a, stack_b, l, mid - 1);
-//     if (mid <= r)
-//         quick_sorting(stack_a, stack_b, mid, r);
+//     return elements_less;
 // }
+// int partition_b(t_node **stack_a, t_node **stack_b, int size, int pivot)
+// {
+//     int elements_greater = 0;
+//     int rotations = 0;
+//     int i;
+
+//     printf("Before partitioning B: ");
+//     print_stack(*stack_b);
+//     printf("Pivot: %d\n", pivot);
+
+//     for (i = 0; i < size; i++)
+//     {
+//         if ((*stack_b)->value >= pivot)
+//         {
+//             pa(stack_a, stack_b);
+//             elements_greater++;
+//         }
+//         else
+//         {
+//             rb(stack_b);
+//             rotations++;
+//         }
+//     }
+
+//     // Restore the stack order
+//     while (rotations > 0)
+//     {
+//         rrb(stack_b);
+//         rotations--;
+//     }
+
+//     printf("After partitioning B: ");
+//     print_stack(*stack_b);
+//     printf("Stack A after partitioning B: ");
+//     print_stack(*stack_a);
+
+//     return elements_greater;
+// }
+
+// // New function to merge elements from B back to A
+// void merge_from_b(t_node **stack_a, t_node **stack_b, int size)
+// {
+//     while (size--)
+//     {
+//         pa(stack_a, stack_b);
+//         if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
+//             sa(stack_a);
+//     }
+// }
+
+// // Helper function to find a better pivot
+// int find_pivot(t_node *stack, int size)
+// {
+//     if (size <= 1)
+//         return stack->value;
+    
+//     // Get first, middle, and last values
+//     int first = stack->value;
+//     int middle = get_nth_value(stack, size / 2);
+//     int last = get_nth_value(stack, size - 1);
+    
+//     // Return the median of three
+//     if ((first <= middle && middle <= last) || (last <= middle && middle <= first))
+//         return middle;
+//     if ((middle <= first && first <= last) || (last <= first && first <= middle))
+//         return first;
+//     return last;
+// }
+
+// // Improved sort_small_a function

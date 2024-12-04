@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:44:28 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/29 19:07:59 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:55:00 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_node	*pop(t_node **stack)
 {
 	t_node	*top;
 
-	if (!*stack)
+	if (!stack || !*stack)
 		return (NULL);
 	top = *stack;
 	*stack = (*stack)->next;

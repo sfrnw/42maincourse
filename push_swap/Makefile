@@ -6,19 +6,19 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2024/12/02 16:58:39 by asafrono         ###   ########.fr        #
+#    Updated: 2024/12/04 14:35:46 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I$(LIBFT_DIR)
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_DIR)
 RM = rm -rf
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS = main.c push_swap.c bubble_sort.c quick_sort.c sort_small.c stack_operations_a.c \
+SRCS = main.c push_swap.c bubble_sort.c quick_sort.c sort_small.c radix_sort.c stack_operations_a.c \
        stack_operations_b.c stack_operations_ab.c stack_operations.c
 
 OBJ_DIR = obj
