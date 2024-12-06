@@ -5,47 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 12:49:06 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 14:50:02 by asafrono         ###   ########.fr       */
+/*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
+/*   Updated: 2024/12/06 15:05:02 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*create_node(int value)
+
+int	is_sorted(t_node *stack)
 {
-	t_node	*new_node;
-
-	new_node = (t_node *)malloc(sizeof(t_node));
-	if (!new_node)
-		return (NULL);
-	new_node->value = value;
-	new_node->next = NULL;
-	return (new_node);
-}
-
-void	free_stack(t_node **stack)
-{
-	t_node	*current;
-	t_node	*next;
-
-	if (!stack || !*stack)
-		return ;
-	current = *stack;
-	while (current)
+	while (stack && stack->next)
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
 	}
-	*stack = NULL;
-}
-
-void	handle_error(t_node **stack)
-{
-	free_stack(stack);
-	ft_putendl_fd("Error", 2);
-	return ;
+	return (1);
 }
 
 t_node	*parse_arguments(int argc, char **argv)
@@ -77,13 +53,45 @@ t_node	*parse_arguments(int argc, char **argv)
 	return (stack_a);
 }
 
-int	is_sorted(t_node *stack)
+int	main(int argc, char **argv)
 {
-	while (stack && stack->next)
+	t_node	*stack_a;
+	t_node	*stack_b;
+	int		size;
+	int		move_count;
+
+	move_count = 0;
+	if (argc < 2)
+		return (0);
+	stack_a = parse_arguments(argc, argv);
+	if (!stack_a)
+		return (1);
+	stack_b = NULL;
+	size = get_stack_size(stack_a);
+	if (!is_sorted(stack_a))
 	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
+		if (size <= 3)
+			sort_small(&stack_a, size, &move_count);
+		else
+			turk_sort(&stack_a, &stack_b, size, &move_count);
 	}
-	return (1);
+	ft_putendl_fd("\n Stack A:", 1);
+	print_stack(stack_a);
+	ft_putendl_fd("\n Stack B:", 1);
+	print_stack(stack_b);
+	ft_putstr_fd("Total moves: \n", 1);
+	ft_putnbr_fd(move_count, 1);
+	free_stack (&stack_a);
+	free_stack (&stack_b);
+	return (0);
 }
+
+// 	ft_putendl_fd("\n Stack A:", 1);
+// 	print_stack(stack_a);
+// 	ft_putendl_fd("\n Stack B:", 1);
+// 	print_stack(stack_b);
+// 	ft_putstr_fd("Total moves: \n", 1);
+// 	ft_putnbr_fd(move_count, 1);
+
+//  bubble_sorting(&stack_a, &stack_b, size);
+//radix_sort(&stack_a, &stack_b, &move_count);
