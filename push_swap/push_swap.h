@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/04 17:32:17 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:30:50 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	bubble_sorting(t_node **stack_a, t_node **stack_b, int size);
 int		get_stack_size(t_node *stack);
 
 // sort small
-void	sort_small(t_node **stack, int size);
+void sort_small(t_node **stack, int size, int *move_count);
 
 //main
 void	print_stack(t_node *stack);
@@ -61,7 +61,9 @@ void	print_stack(t_node *stack);
 //radix sorting
 void	radix_sort(t_node **stack_a, t_node **stack_b, int *move_count);
 //radix optimized sorting 
-void	optimized_radix_sort(t_node **stack_a, t_node **stack_b,
+void	radix_sort2(t_node **stack_a, t_node **stack_b,
 			int *move_count);
+// turk sorting
+void turk_sort(t_node **stack_a, t_node **stack_b, int size, int *move_count);
 
 #endif

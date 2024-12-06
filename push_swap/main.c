@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/04 17:33:30 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:32:24 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,13 @@ int	main(int argc, char **argv)
 	if (!is_sorted(stack_a))
 	{
 		if (size <= 3)
-			sort_small(&stack_a, size);
+			sort_small(&stack_a, size, &move_count);
 		else
-			radix_sort(&stack_a, &stack_b, &move_count);
+		{
+			//radix_sort(&stack_a, &stack_b, &move_count);
+			turk_sort(&stack_a, &stack_b, size, &move_count);
+			//combined_sort(&stack_a, &stack_b, &move_count);
+		}	
 	}
 	ft_putendl_fd("\n Stack A:", 1);
 	print_stack(stack_a);
