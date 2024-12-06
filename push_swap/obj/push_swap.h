@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 15:07:34 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:27:47 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_node
 {
@@ -70,6 +70,19 @@ int		get_stack_size(t_node *stack);
 void	radix_sort(t_node **stack_a, t_node **stack_b, int *move_count);
 
 // turk sorting
+int		find_median(t_node *stack);
+void	partition_stack(t_node **stack_a, t_node **stack_b, int median,
+							int *move_count);
+int		find_min_position(t_node *stack);
+int		find_insertion_point(t_node *stack_a, int value);
+int		calculate_cost(t_node *stack_a, t_node *stack_b, int element,
+								int position_b);
+int		find_best_element(t_node *stack_a, t_node *stack_b);
+void	move_to_top(t_node **stack, int value, int *move_count);
+void	insert_element(t_node **stack_a, t_node **stack_b, int *move_count);
+void	rotate_stack_to_position(t_node **stack, int pos, int size,
+									int *move_count);
+void	rotate_to_min(t_node **stack, int *move_count);
 void	turk_sort(t_node **stack_a, t_node **stack_b,
 			int size, int *move_count);
 
