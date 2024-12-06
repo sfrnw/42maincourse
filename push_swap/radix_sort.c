@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:28:04 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/05 12:52:33 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:53:55 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,9 @@ static void	push_based_on_bit(t_node **stack_a, t_node **stack_b,
 	while (i < size)
 	{
 		if (((*stack_a)->value >> bit) & 1)
-		{
-			ra(stack_a);
-			(*move_count)++;
-		}
+			*move_count += ra(stack_a);
 		else
-		{
-			pb(stack_a, stack_b);
-			(*move_count)++;
-		}
+			*move_count += pb(stack_a, stack_b);
 		i++;
 	}
 }
@@ -60,10 +54,7 @@ static void	push_based_on_bit(t_node **stack_a, t_node **stack_b,
 static void	empty_stack_b(t_node **stack_a, t_node **stack_b, int *move_count)
 {
 	while (*stack_b)
-	{
-		pa(stack_a, stack_b);
-		(*move_count)++;
-	}
+		*move_count += pa(stack_a, stack_b);
 }
 
 void	radix_sort(t_node **stack_a, t_node **stack_b, int *move_count)

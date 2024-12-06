@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:49:06 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/04 17:14:24 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:50:02 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handle_error(t_node **stack)
 {
 	free_stack(stack);
 	ft_putendl_fd("Error", 2);
-	exit(1);
+	return ;
 }
 
 t_node	*parse_arguments(int argc, char **argv)

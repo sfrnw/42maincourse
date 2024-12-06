@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 12:32:24 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:38:24 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,7 @@ int	main(int argc, char **argv)
 		if (size <= 3)
 			sort_small(&stack_a, size, &move_count);
 		else
-		{
-			//radix_sort(&stack_a, &stack_b, &move_count);
 			turk_sort(&stack_a, &stack_b, size, &move_count);
-			//combined_sort(&stack_a, &stack_b, &move_count);
-		}	
 	}
 	ft_putendl_fd("\n Stack A:", 1);
 	print_stack(stack_a);
@@ -80,11 +76,12 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-	// ft_putendl_fd("\n Stack A:", 1);
-	// print_stack(stack_a);
-	// ft_putendl_fd("\n Stack B:", 1);
-	// print_stack(stack_b);
-	// ft_putstr_fd("Total moves: \n", 1);
-	// ft_putnbr_fd(move_count, 1);
+// 	ft_putendl_fd("\n Stack A:", 1);
+// 	print_stack(stack_a);
+// 	ft_putendl_fd("\n Stack B:", 1);
+// 	print_stack(stack_b);
+// 	ft_putstr_fd("Total moves: \n", 1);
+// 	ft_putnbr_fd(move_count, 1);
 
 //  bubble_sorting(&stack_a, &stack_b, size);
+//radix_sort(&stack_a, &stack_b, &move_count);
