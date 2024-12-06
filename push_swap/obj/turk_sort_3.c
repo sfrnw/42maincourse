@@ -5,30 +5,97 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 14:53:42 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 15:22:46 by asafrono         ###   ########.fr       */
+/*   Created: 2024/12/05 12:45:31 by asafrono          #+#    #+#             */
+/*   Updated: 2024/12/06 17:49:17 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	turk_sort(t_node **stack_a, t_node **stack_b, int size, int *move_count)
+void	move_to_top(t_node **stack, int value, int *move_count)
 {
-	int	median;
-	int	best_element;
+	int		position;
+	int		size;
+	t_node	*current;
 
-	while (size > 3)
+	position = 0;
+	size = get_stack_size(*stack);
+	current = *stack;
+	while (current && current->value != value)
 	{
-		median = find_median(*stack_a);
-		partition_stack(stack_a, stack_b, median, move_count);
-		size = get_stack_size(*stack_a);
+		position++;
+		current = current->next;
 	}
-	sort_small(stack_a, size, move_count);
-	while (*stack_b)
+	if (position <= size / 2)
+		while ((*stack)->value != value)
+			*move_count += rb(stack);
+	else
+		while ((*stack)->value != value)
+			*move_count += rrb(stack);
+}
+
+void	insert_element(t_node **stack_a, t_node **stack_b, int *move_count)
+{
+	int	insertion_point;
+	int	size;
+	int	rotations;
+
+	insertion_point = find_insertion_point(*stack_a, (*stack_b)->value);
+	size = get_stack_size(*stack_a);
+	if (insertion_point <= size / 2)
 	{
-		best_element = find_best_element(*stack_a, *stack_b);
-		move_to_top(stack_b, best_element, move_count);
-		insert_element(stack_a, stack_b, move_count);
+		rotations = insertion_point;
+		while (rotations > 0)
+		{
+			*move_count += ra(stack_a);
+			rotations--;
+		}
 	}
-	rotate_to_min(stack_a, move_count);
+	else
+	{
+		rotations = size - insertion_point;
+		while (rotations > 0)
+		{
+			*move_count += rra(stack_a);
+			rotations--;
+		}
+	}
+	*move_count += pa(stack_a, stack_b);
+}
+
+void	rotate_to_min(t_node **stack, int *move_count)
+{
+	t_node	*min_node;
+	t_node	*current;
+	int		min_pos;
+	int		current_pos;
+	int		size;
+
+	min_node = *stack;
+	current = *stack;
+	min_pos = 0;
+	current_pos = 0;
+	size = get_stack_size(*stack);
+	while (current)
+	{
+		if (current->value < min_node->value)
+		{
+			min_node = current;
+			min_pos = current_pos;
+		}
+		current = current->next;
+		current_pos++;
+	}
+	rotate_stack_to_position(stack, min_pos, size, move_count);
+}
+
+void	rotate_stack_to_position(t_node **stack, int pos, int size,
+									int *move_count)
+{
+	if (pos <= size / 2)
+		while (pos--)
+			*move_count += ra(stack);
+	else
+		while (pos++ < size)
+			*move_count += rra(stack);
 }

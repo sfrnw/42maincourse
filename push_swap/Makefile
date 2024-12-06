@@ -6,7 +6,7 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2024/12/06 15:30:04 by asafrono         ###   ########.fr        #
+#    Updated: 2024/12/06 17:05:10 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ_DIR = obj
 
 SRCS = bubble_sort.c sort_small.c radix_sort.c stack_operations_a.c \
        stack_operations_b.c stack_operations_ab.c stack_operations_1.c \
-	   stack_operations_2.c turk_sort.c turk_sort_2.c turk_sort_3.c \
+	   stack_operations_2.c turk_sort_1.c turk_sort_2.c turk_sort_3.c \
 	   push_swap.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:45:31 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 15:26:43 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:45:13 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,90 +38,97 @@ int	find_best_element(t_node *stack_a, t_node *stack_b)
 	return (best_element);
 }
 
-void	move_to_top(t_node **stack, int value, int *move_count)
+int	calculate_cost(t_node *stack_a, t_node *stack_b, int element,
+								int position_b)
+{
+	int								size_a;
+	int								size_b;
+	int								insertion_point;
+	int								cost_a;
+	int								cost_b;
+
+	size_a = get_stack_size(stack_a);
+	size_b = get_stack_size(stack_b);
+	insertion_point = find_insertion_point(stack_a, element);
+	if (insertion_point < size_a / 2)
+		cost_a = insertion_point;
+	else
+		cost_a = size_a - insertion_point;
+	if (position_b < size_b / 2)
+		cost_b = position_b;
+	else
+		cost_b = size_b - position_b;
+	return (cost_a + cost_b);
+}
+
+int	find_insertion_point(t_node *stack_a, int element)
 {
 	int		position;
-	int		size;
 	t_node	*current;
+	t_node	*first;
+	t_node	*next;
 
 	position = 0;
-	size = get_stack_size(*stack);
-	current = *stack;
-	while (current && current->value != value)
+	current = stack_a;
+	first = stack_a;
+	if (!stack_a)
+		return (0);
+	while (1)
 	{
+		if (current->next)
+			next = current->next;
+		else
+			next = first;
+		if (element > current->value && element <= next->value)
+			return ((position + 1) % get_stack_size(stack_a));
+		current = next;
 		position++;
-		current = current->next;
+		if (current == first)
+			break ;
 	}
-	if (position <= size / 2)
-		while ((*stack)->value != value)
-			*move_count += rb(stack);
-	else
-		while ((*stack)->value != value)
-			*move_count += rrb(stack);
+	return (find_min_position(stack_a));
 }
 
-void	insert_element(t_node **stack_a, t_node **stack_b, int *move_count)
+int	find_min_position(t_node *stack)
 {
-	int	insertion_point;
-	int	size;
-	int	rotations;
-
-	insertion_point = find_insertion_point(*stack_a, (*stack_b)->value);
-	size = get_stack_size(*stack_a);
-	if (insertion_point <= size / 2)
-	{
-		rotations = insertion_point;
-		while (rotations > 0)
-		{
-			*move_count += ra(stack_a);
-			rotations--;
-		}
-	}
-	else
-	{
-		rotations = size - insertion_point;
-		while (rotations > 0)
-		{
-			*move_count += rra(stack_a);
-			rotations--;
-		}
-	}
-	*move_count += pa(stack_a, stack_b);
-}
-
-void	rotate_stack_to_position(t_node **stack, int pos, int size,
-									int *move_count)
-{
-	if (pos <= size / 2)
-		while (pos--)
-			*move_count += ra(stack);
-	else
-		while (pos++ < size)
-			*move_count += rra(stack);
-}
-
-void	rotate_to_min(t_node **stack, int *move_count)
-{
-	t_node	*min_node;
+	int		min_value;
+	int		min_position;
+	int		current_position;
 	t_node	*current;
-	int		min_pos;
-	int		current_pos;
-	int		size;
 
-	min_node = *stack;
-	current = *stack;
-	min_pos = 0;
-	current_pos = 0;
-	size = get_stack_size(*stack);
+	if (!stack)
+		return (0);
+	min_value = stack->value;
+	min_position = 0;
+	current_position = 0;
+	current = stack;
 	while (current)
 	{
-		if (current->value < min_node->value)
+		if (current->value < min_value)
 		{
-			min_node = current;
-			min_pos = current_pos;
+			min_value = current->value;
+			min_position = current_position;
 		}
 		current = current->next;
-		current_pos++;
+		current_position++;
 	}
-	rotate_stack_to_position(stack, min_pos, size, move_count);
+	return (min_position);
 }
+// find_insertion_point
+// This function determines where in stack A a given value should be inserted:
+// It iterates through stack A, treating it as a circular list.
+// It looks for a position where the value is greater than the current 
+// node's value and less than or equal to the next node's value.
+//
+// If such a position is found, it returns the index of the next node 
+// (modulo the stack size to handle wrap-around).
+// position + 1: We add 1 to the current position because we want to insert
+// the element after the current node.
+// % get_stack_size(stack_a): This is the modulo operation. It's used to handle
+// the case where the insertion point is at the end of the stack.
+// If position + 1 is less than the stack size, the modulo operation doesn't change the value.
+// If position + 1 equals the stack size, the modulo operation will return 0, indicating that 
+// the element should be inserted at the beginning of the stack.
+//
+// If no suitable position is found (which happens when the value is
+// smaller than all elements in stack A), it calls find_min_position to find where the smallest element in stack A is located.
