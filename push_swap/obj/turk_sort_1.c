@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:53:42 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 16:03:47 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:15:44 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	turk_sort(t_node **stack_a, t_node **stack_b, int *move_count)
 	rotate_to_min(stack_a, move_count);
 }
 
+// This function finds a pivot element for partitioning the stack. 
 int	find_pivot(t_node *stack)
 {
 	int	values[5];
@@ -64,6 +65,7 @@ int	find_pivot(t_node *stack)
 	return (values[2]);
 }
 
+//  This function selects 5 elements from the stack for pivot selection. 
 void	select_and_sort_elements(t_node *stack, int *values)
 {
 	t_node	*elements[5];
@@ -88,6 +90,7 @@ void	select_and_sort_elements(t_node *stack, int *values)
 		values[i] = elements[i]->value;
 }
 
+//  This function partitions stack A based on the pivot. 
 void	partition_stack(t_node **stack_a, t_node **stack_b, int pivot,
 							int *move_count)
 {

@@ -6,12 +6,13 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:45:31 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 14:21:45 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:13:39 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+//This function moves a specific value to the top of the stack
 void	move_to_top(t_node **stack, int value, int *move_count)
 {
 	int		position;
@@ -34,6 +35,8 @@ void	move_to_top(t_node **stack, int value, int *move_count)
 			*move_count += rrb(stack);
 }
 
+//  This function inserts the top element of stack B
+//	into the correct position in stack A. 
 void	insert_element(t_node **stack_a, t_node **stack_b, int *move_count)
 {
 	int	insertion_point;
@@ -63,6 +66,7 @@ void	insert_element(t_node **stack_a, t_node **stack_b, int *move_count)
 	*move_count += pa(stack_a, stack_b);
 }
 
+// This function rotates the stack so that the minimum value is at the top. 
 void	rotate_to_min(t_node **stack, int *move_count)
 {
 	t_node	*min_node;
@@ -89,6 +93,7 @@ void	rotate_to_min(t_node **stack, int *move_count)
 	rotate_stack_to_position(stack, min_pos, size, move_count);
 }
 
+// This function rotates the stack to bring a specific position to the top. 
 void	rotate_stack_to_position(t_node **stack, int pos, int size,
 									int *move_count)
 {

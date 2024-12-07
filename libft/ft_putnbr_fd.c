@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:45:49 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/04 14:09:46 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:37:14 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ void	ft_putnbr_fd(int n, int fd)
 		num = 147483648;
 	}
 	ft_putnbr_recursive(num, fd);
+}
+
+int	ft_putnbr(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n == -2147483648)
+		return (ft_putstr("-2147483648"));
+	if (n < 0)
+	{
+		count += ft_putchar('-');
+		n = -n;
+	}
+	if (n >= 10)
+		count += ft_putnbr(n / 10);
+	count += ft_putchar(n % 10 + '0');
+	return (count);
 }
 
 // int main(void)

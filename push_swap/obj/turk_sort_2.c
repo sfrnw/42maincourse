@@ -6,12 +6,14 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:45:31 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 14:21:48 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:16:08 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+//	This function finds the element in stack B 
+//	that would be the most efficient to move to stack A.
 int	find_best_element(t_node *stack_a, t_node *stack_b)
 {
 	int		best_element;
@@ -38,6 +40,8 @@ int	find_best_element(t_node *stack_a, t_node *stack_b)
 	return (best_element);
 }
 
+//  This function calculates the cost of moving
+//	an element from stack B to stack A. 
 int	calculate_cost(t_node *stack_a, t_node *stack_b, int element,
 								int position_b)
 {
@@ -61,6 +65,8 @@ int	calculate_cost(t_node *stack_a, t_node *stack_b, int element,
 	return (cost_a + cost_b);
 }
 
+//	This function finds the correct position
+//	to insert an element into stack A. 
 int	find_insertion_point(t_node *stack_a, int element)
 {
 	int		position;
@@ -89,6 +95,7 @@ int	find_insertion_point(t_node *stack_a, int element)
 	return (find_min_position(stack_a));
 }
 
+// This function finds the position of the minimum value in a stack. 
 int	find_min_position(t_node *stack)
 {
 	int		min_value;

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:44:23 by asafrono          #+#    #+#             */
-/*   Updated: 2024/11/04 14:09:47 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:26:21 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
+}
+
+int	ft_putchar(char c)
+{
+	return (write(1, &c, 1));
 }
 
 // int main(void)
