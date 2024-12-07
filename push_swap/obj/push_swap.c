@@ -6,37 +6,63 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 16:16:09 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:20:47 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
+t_node	*process_argument(char *arg, t_node **stack_a)
+{
+	t_node	*new_node;
+	t_node	*last;
+
+	if (!is_valid_number(arg))
+		return (handle_error(stack_a), NULL);
+	new_node = create_node(ft_atoi(arg));
+	if (!new_node)
+		return (handle_error(stack_a), NULL);
+	if (*stack_a == NULL)
+		*stack_a = new_node;
+	else
+	{
+		last = *stack_a;
+		while (last->next)
+			last = last->next;
+		last->next = new_node;
+	}
+	return (*stack_a);
+}
+
 t_node	*parse_arguments(int argc, char **argv)
 {
 	t_node	*stack_a;
+	char	**args;
 	int		i;
-	t_node	*last;
-	t_node	*new_node;
+	int		j;
 
-	stack_a = NULL;
 	i = 0;
+	stack_a = NULL;
 	while (++i < argc)
 	{
-		if (!is_valid_number(argv[i]))
-			handle_error(&stack_a, 1);
-		new_node = create_node(ft_atoi(argv[i]));
-		if (!new_node)
-			handle_error(&stack_a, 3);
-		if (stack_a == NULL)
-			stack_a = new_node;
-		else
-		{
-			last = stack_a;
-			while (last->next)
-				last = last->next;
-			last->next = new_node;
-		}
+		args = ft_split(argv[i], ' ');
+		if (!args)
+			return (handle_error(&stack_a), NULL);
+		j = -1;
+		while (args[++j])
+			if (!process_argument(args[j], &stack_a))
+				return (ft_free_split(args), NULL);
+		ft_free_split(args);
 	}
 	return (stack_a);
 }
@@ -51,16 +77,8 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	stack_a = parse_arguments(argc, argv);
-	if (!stack_a)
-	{
-		handle_error(&stack_a, 4);
-		return (1);
-	}
 	if (has_duplicate(stack_a))
-	{
-		handle_error(&stack_a, 2);
-		return (1);
-	}
+		return (handle_error(&stack_a), 1);
 	stack_b = NULL;
 	if (!is_sorted(stack_a))
 		turk_sort(&stack_a, &stack_b, &move_count);

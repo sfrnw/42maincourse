@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:53:58 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 15:56:58 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:57:47 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,9 @@ int	has_duplicate(t_node *stack)
 	return (0);
 }
 
-void	handle_error(t_node **stack, int i)
+void	handle_error(t_node **stack)
 {
 	free_stack(stack);
-	if (i == 1)
-	{
-		ft_putendl_fd("Error: not a number", 2);
-		return ;
-	}
-	if (i == 2)
-	{
-		ft_putendl_fd("Error: duplicate", 2);
-		return ;
-	}
-	if (i == 3)
-	{
-		ft_putendl_fd("Error: node creation", 2);
-		return ;
-	}
-	if (i == 4)
-	{
-		ft_putendl_fd("Error: no stack", 2);
-		return ;
-	}
+	ft_putendl_fd("Error", 2);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 15:56:55 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:20:48 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ typedef struct s_node
 }	t_node;
 
 //push_swap
-
+void	ft_free_split(char **split);
+t_node	*process_argument(char *arg, t_node **stack_a);
 t_node	*parse_arguments(int argc, char **argv);
 int		main(int argc, char **argv);
 
 //stack errors
 int		is_sorted(t_node *stack);
 int		has_duplicate(t_node *stack);
-void	handle_error(t_node **stack, int i);
+void	handle_error(t_node **stack);
 
 //stack operations
 t_node	*create_node(int value);
