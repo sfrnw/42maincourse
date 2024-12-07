@@ -6,23 +6,11 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:42:34 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 17:04:59 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:56:15 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
-int	is_sorted(t_node *stack)
-{
-	while (stack && stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
 
 t_node	*parse_arguments(int argc, char **argv)
 {
@@ -36,10 +24,10 @@ t_node	*parse_arguments(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (!is_valid_number(argv[i]))
-			handle_error(&stack_a);
+			handle_error(&stack_a, 1);
 		new_node = create_node(ft_atoi(argv[i]));
 		if (!new_node)
-			handle_error(&stack_a);
+			handle_error(&stack_a, 3);
 		if (stack_a == NULL)
 			stack_a = new_node;
 		else
@@ -64,18 +52,20 @@ int	main(int argc, char **argv)
 		return (0);
 	stack_a = parse_arguments(argc, argv);
 	if (!stack_a)
+	{
+		handle_error(&stack_a, 4);
 		return (1);
+	}
+	if (has_duplicate(stack_a))
+	{
+		handle_error(&stack_a, 2);
+		return (1);
+	}
 	stack_b = NULL;
 	if (!is_sorted(stack_a))
 		turk_sort(&stack_a, &stack_b, &move_count);
-	ft_putendl_fd("\n Stack A:", 1);
-	print_stack(stack_a);
-	ft_putendl_fd("\n Stack B:", 1);
-	print_stack(stack_b);
-	ft_putstr_fd("Total moves: \n", 1);
-	ft_putnbr_fd(move_count, 1);
-	free_stack (&stack_a);
-	free_stack (&stack_b);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (0);
 }
 

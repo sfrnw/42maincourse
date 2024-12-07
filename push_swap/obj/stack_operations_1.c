@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:49:06 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 15:06:29 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:54:42 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ void	free_stack(t_node **stack)
 		current = next;
 	}
 	*stack = NULL;
-}
-
-void	handle_error(t_node **stack)
-{
-	free_stack(stack);
-	ft_putendl_fd("Error", 2);
-	return ;
 }
 
 int	get_stack_size(t_node *stack)

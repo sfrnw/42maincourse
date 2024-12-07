@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:53:42 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 17:49:17 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 16:03:47 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	turk_sort(t_node **stack_a, t_node **stack_b, int *move_count)
 {
 	int	pivot;
 	int	best_element;
-	int size;
+	int	size;
 
 	size = get_stack_size(*stack_a);
 	while (size > 3)
@@ -35,33 +35,57 @@ void	turk_sort(t_node **stack_a, t_node **stack_b, int *move_count)
 	rotate_to_min(stack_a, move_count);
 }
 
-int find_pivot(t_node *stack)
+int	find_pivot(t_node *stack)
 {
-    int     first;
-    int     middle;
-    int     last;
-    int     size;
-    t_node  *current;
-    int     i;
+	int	values[5];
+	int	i;
+	int	j;
+	int	temp;
 
-    size = get_stack_size(stack);
-    first = stack->value;
-    current = stack;
-    i = 0;
-    while (i < size / 2)
-    {
-        current = current->next;
-        i++;
-    }
-    middle = current->value;
-    while (current->next)
-        current = current->next;
-    last = current->value;
-    if ((first <= middle && middle <= last) || (last <= middle && middle <= first))
-        return (middle);
-    if ((middle <= first && first <= last) || (last <= first && first <= middle))
-        return (first);
-    return (last);
+	if (get_stack_size(stack) < 5)
+		return (stack->value);
+	select_and_sort_elements(stack, values);
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4 - i)
+		{
+			if (values[j] > values[j + 1])
+			{
+				temp = values[j];
+				values[j] = values[j + 1];
+				values[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (values[2]);
+}
+
+void	select_and_sort_elements(t_node *stack, int *values)
+{
+	t_node	*elements[5];
+	int		i;
+
+	i = -1;
+	while (++i < 5)
+		elements[i] = stack;
+	i = -1;
+	while (++i < get_stack_size(stack) / 4)
+		elements[1] = elements[1]->next;
+	i = -1;
+	while (++i < get_stack_size(stack) / 2)
+		elements[2] = elements[2]->next;
+	i = -1;
+	while (++i < 3 * get_stack_size(stack) / 4)
+		elements[3] = elements[3]->next;
+	while (elements[4]->next)
+		elements[4] = elements[4]->next;
+	i = -1;
+	while (++i < 5)
+		values[i] = elements[i]->value;
 }
 
 void	partition_stack(t_node **stack_a, t_node **stack_b, int pivot,

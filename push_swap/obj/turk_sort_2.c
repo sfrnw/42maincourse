@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:45:31 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 17:45:13 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:21:48 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,12 @@ int	find_min_position(t_node *stack)
 // the element after the current node.
 // % get_stack_size(stack_a): This is the modulo operation. It's used to handle
 // the case where the insertion point is at the end of the stack.
-// If position + 1 is less than the stack size, the modulo operation doesn't change the value.
-// If position + 1 equals the stack size, the modulo operation will return 0, indicating that 
-// the element should be inserted at the beginning of the stack.
+// If position + 1 is less than the stack size, the modulo operation 
+// doesn't change the value.
+// If position + 1 equals the stack size, the modulo operation will
+//  return 0, indicating that the element should be inserted at the
+// beginning of the stack.
 //
 // If no suitable position is found (which happens when the value is
-// smaller than all elements in stack A), it calls find_min_position to find where the smallest element in stack A is located.
+// smaller than all elements in stack A), it calls find_min_position to
+// find where the smallest element in stack A is located.
