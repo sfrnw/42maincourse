@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:29:39 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/06 14:16:17 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:38:55 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int		ft_putchar(char c);
 int		ft_isspace(int c);
 int		is_valid_number(char *str);
 void	ft_qsort(int *arr, int low, int high);
+double	ft_atodbl(char *s);
+
 
 #endif

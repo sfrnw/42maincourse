@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/08 19:27:28 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:34:16 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 # include <math.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 #define ERROR_MESSAGE "Please enter \n\t\".fractol mandelbrot\" for \n\t\"./fractol .julia <value_1> <value_2>\"\n"
 
 // we use a square to keep the rendering math simple
-#define WIDTH	800
-#define HEIGHT	800
+#define WIDTH	1000
+#define HEIGHT	1000
 
 //COLORS
 
@@ -51,38 +53,6 @@
 #define COLOR_NEON_YELLOW      0xFFFF00
 #define COLOR_FLUORESCENT_GREEN 0x00FF00
 
-// // Basic colors
-// #define COLOR_BLACK "\x1b[30m"
-// #define COLOR_RED "\x1b[31m"
-// #define COLOR_GREEN "\x1b[32m"
-// #define COLOR_YELLOW "\x1b[33m"
-// #define COLOR_BLUE "\x1b[34m"
-// #define COLOR_MAGENTA "\x1b[35m"
-// #define COLOR_CYAN "\x1b[36m"
-// #define COLOR_WHITE "\x1b[37m"
-
-// // Bright colors
-// #define COLOR_BRIGHT_BLACK "\x1b[90m"
-// #define COLOR_BRIGHT_RED "\x1b[91m"
-// #define COLOR_BRIGHT_GREEN "\x1b[92m"
-// #define COLOR_BRIGHT_YELLOW "\x1b[93m"
-// #define COLOR_BRIGHT_BLUE "\x1b[94m"
-// #define COLOR_BRIGHT_MAGENTA "\x1b[95m"
-// #define COLOR_BRIGHT_CYAN "\x1b[96m"
-// #define COLOR_BRIGHT_WHITE "\x1b[97m"
-
-// // Psychedelic and vibrant colors
-// #define COLOR_NEON_PINK "\x1b[38;2;255;20;147m"
-// #define COLOR_ELECTRIC_PURPLE "\x1b[38;2;191;0;255m"
-// #define COLOR_ACID_GREEN "\x1b[38;2;176;255;0m"
-// #define COLOR_PSYCHEDELIC_ORANGE "\x1b[38;2;255;127;0m"
-// #define COLOR_ELECTRIC_BLUE "\x1b[38;2;0;255;255m"
-// #define COLOR_NEON_YELLOW "\x1b[38;2;255;255;0m"
-// #define COLOR_FLUORESCENT_GREEN "\x1b[38;2;0;255;0m"
-// #define COLOR_HOT_PINK "\x1b[38;2;255;105;180m"
-
-// // Reset color
-// #define COLOR_RESET "\x1b[0m"
 
 
 // COMPLEX value
@@ -101,14 +71,14 @@ typedef	struct	s_complex
 * values from mlx_get_data_addr()
 */
 
-typedef struct s_img
+typedef struct	s_img
 {
-	void	*img_ptr; //pointer to image struct
-	char	*pixels_ptr; //point to the actual pixels
-	int		bpp; //bits per puxel
-	int		endian;
-	int		line_len;
-}			t_img;
+	void		*img_ptr; //pointer to image struct
+	char		*pixels_ptr; //point to the actual pixels
+	int			bpp; //bits per puxel
+	int			endian;
+	int			line_len;
+}				t_img;
 
 /*
 * FRACTAL ID
@@ -120,28 +90,47 @@ typedef struct s_img
 
 typedef struct	s_fractal
 {
-	char	*name;
+	char		*name;
 	//MLX
-	void	*mlx_connection; //mlx_init()
-	void	*mlx_window;	//mlx_new_window()
+	void		*mlx_connection; //mlx_init()
+	void		*mlx_window;	//mlx_new_window()
 	//Image
-	t_img	img;
+	t_img		img;
 	
 	//Hooks member variables
-	double	escaped_value; //hypotenuse
-	int		iterations_definition; // value tight with the image quality and rendering speed
-
+	double		escaped_value; //hypotenuse
+	double		escaped_value_2; //for interestinf fractal
+	int			iterations_definition; // value tight with the image quality and rendering speed
+	double		shift_x;
+	double		shift_y;
+	double		zoom;
+	double		julia_x;
+	double		julia_y;
+	int			x;
+    int			y;
+	void (*fractal_function)(int, int, struct s_fractal*);
 }				t_fractal;
 
 // init
 void		fractal_init(t_fractal *fractal);
 
 //render
-void fractal_render(t_fractal *fractal);
+void		fractal_render(t_fractal *fractal);
 
 // math
 double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
-t_complex	sum_complex(t_complex z1, t_complex z2);
-t_complex	square_complex(t_complex z);
+t_complex 	complex_add(t_complex a, t_complex b);
+t_complex	complex_square(t_complex z);
+t_complex 	complex_i_pow(t_complex z);
+
+// hooks events
+int			key_handler(int keysym, t_fractal *fractal);
+
+//cleanup
+int			close_handler(t_fractal *fractal);
+int			mouse_handler(int button, int x, int y, t_fractal *fractal);
+int			julia_track(int x, int y, t_fractal *fractal);
+
+
 
 #endif

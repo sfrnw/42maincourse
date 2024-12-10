@@ -6,7 +6,7 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 11:38:14 by asafrono          #+#    #+#              #
-#    Updated: 2024/12/06 14:16:08 by asafrono         ###   ########.fr        #
+#    Updated: 2024/12/09 15:32:37 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
        ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
        ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 	   ft_utoa_base.c ft_utoa.c ft_putnbr_base.c ft_is_valid_number.c \
-	   ft_isspace.c ft_qsort.c
+	   ft_isspace.c ft_qsort.c ft_atodbl.c
 
 OBJS = $(SRCS:.c=.o)
 

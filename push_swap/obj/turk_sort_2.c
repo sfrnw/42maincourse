@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:45:31 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/07 16:16:08 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:44:36 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	find_best_element(t_node *stack_a, t_node *stack_b)
 	}
 	return (best_element);
 }
+//This function iterates through stack B, calculating the cost
+// of moving each element to stack A. It keeps track of the 
+// element with the lowest cost and returns it as the best element to move.
 
 //  This function calculates the cost of moving
 //	an element from stack B to stack A. 
@@ -121,6 +124,10 @@ int	find_min_position(t_node *stack)
 	}
 	return (min_position);
 }
+// This function iterates through the stack, keeping
+// track of the smallest value encountered and its position.
+// It returns the position of the minimum value in the stack.
+
 // find_insertion_point
 // This function determines where in stack A a given value should be inserted:
 // It iterates through stack A, treating it as a circular list.
