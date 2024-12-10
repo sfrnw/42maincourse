@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:21 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/10 14:46:09 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:36:44 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,23 @@ int	key_handler(int keysym, t_fractal *fractal)
 	else if (keysym == XK_Right)
 		fractal->shift_x += 0.5 * fractal->zoom;
 	else if (keysym == XK_Up)
-		fractal->shift_y += 0.5 * fractal->zoom;
-	else if (keysym == XK_Down)
 		fractal->shift_y -= 0.5 * fractal->zoom;
+	else if (keysym == XK_Down)
+		fractal->shift_y += 0.5 * fractal->zoom;
 	else if (keysym == XK_z)
 		fractal->iterations_definition += 10;
 	else if (keysym == XK_x)
 		fractal->iterations_definition -= 10;
-	
+	else if (keysym == XK_j)
+    {
+        fractal->julia_x += 0.01;
+        fractal->julia_y += 0.01;
+    }
+    else if (keysym == XK_k)
+    {
+        fractal->julia_x -= 0.01;
+        fractal->julia_y -= 0.01;
+    }
 	// refresh image
 	fractal_render(fractal);
 	
@@ -69,14 +78,27 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 	return(0);	
 }
 
-// track the mouse to change kilia dinamically
-int	julia_track(int x, int y, t_fractal *fractal)
+// track the mouse to change julia dinamically
+// int	julia_track(int x, int y, t_fractal *fractal)
+// {
+// 	if (!ft_strncmp(fractal->name, "julia", 5))
+// 	{
+// 		fractal->julia_x = (map(x, -2, 2, 0, WIDTH) * fractal->zoom) + 0.1 * fractal->shift_x;
+// 		fractal->julia_y = (map(y, 2, -2, 0, HEIGHT) * fractal->zoom) + 0.1 * fractal->shift_y;
+// 		fractal_render (fractal);
+// 	}
+// 	return (0);
+// }
+
+int color_cycle(t_fractal *fractal)
 {
-	if (!ft_strncmp(fractal->name, "julia", 5))
-	{
-		fractal->julia_x = (map(x, -2, 2, 0, WIDTH) * fractal->zoom) + 0.01 * fractal->shift_x;
-		fractal->julia_y = (map(y, 2, -2, 0, HEIGHT) * fractal->zoom) + 0.01 * fractal->shift_y;
-		fractal_render (fractal);
-	}
-	return (0);
+    static int frame_count = 0;
+    frame_count++;
+    if (frame_count >= 60) // Assuming 60 FPS, this will change color every second
+    {
+        fractal->color_shift = (fractal->color_shift + 1) % 360;
+        fractal_render(fractal);
+        frame_count = 0;
+    }
+    return (0);
 }

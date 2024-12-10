@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:47:45 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/10 16:34:19 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:19:24 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static void calculate_fractal(t_complex z, t_complex c, t_fractal *fractal,
     while (i < fractal->iterations_definition)
     {
         transform(&z, &c);
-        if ((z.x * z.x) + (z.y * z.y) > fractal->escaped_value_2)
+        if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
         {
-            color = map(i, COLOR_BLACK, COLOR_WHITE, 0, fractal->iterations_definition);
+            color = get_color(i, fractal);
             my_pixel_put(fractal->x, fractal->y, &fractal->img, color);
             return;
         }
@@ -143,4 +143,22 @@ void fractal_render(t_fractal *fractal)
 			handle_pixel(x, y, fractal);
 	}
 	mlx_put_image_to_window(fractal->mlx_connection, fractal->mlx_window, fractal->img.img_ptr, 0, 0);
+}
+
+int get_color(int iterations, t_fractal *fractal)
+{
+    double t = (double)iterations / fractal->iterations_definition;
+    int shift = fractal->color_shift;
+
+    // Use a combination of sine waves for each color channel
+    int r = (int)((sin(t * 5 + shift * 0.1) * 0.5 + 0.5) * 255);
+    int g = (int)((sin(t * 5 + shift * 0.1 + 2.094) * 0.5 + 0.5) * 255);
+    int b = (int)((sin(t * 5 + shift * 0.1 + 4.188) * 0.5 + 0.5) * 255);
+
+    // Ensure color values are within 0-255 range
+    r = r < 0 ? 0 : (r > 255 ? 255 : r);
+    g = g < 0 ? 0 : (g > 255 ? 255 : g);
+    b = b < 0 ? 0 : (b > 255 ? 255 : b);
+
+    return (r << 16) | (g << 8) | b;
 }

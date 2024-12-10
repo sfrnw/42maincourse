@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/10 16:34:16 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:32:36 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ typedef struct	s_fractal
 	t_img		img;
 	
 	//Hooks member variables
-	double		escaped_value; //hypotenuse
-	double		escaped_value_2; //for interestinf fractal
+	double		escape_value; //hypotenuse
 	int			iterations_definition; // value tight with the image quality and rendering speed
 	double		shift_x;
 	double		shift_y;
@@ -108,14 +107,18 @@ typedef struct	s_fractal
 	double		julia_y;
 	int			x;
     int			y;
-	void (*fractal_function)(int, int, struct s_fractal*);
+	void		(*fractal_function)(int, int, struct s_fractal*);
+	int			color_shift;
 }				t_fractal;
 
 // init
 void		fractal_init(t_fractal *fractal);
+int			color_cycle(t_fractal *fractal);
 
 //render
 void		fractal_render(t_fractal *fractal);
+int 		get_color(int iterations, t_fractal *fractal);
+
 
 // math
 double		map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
@@ -129,7 +132,7 @@ int			key_handler(int keysym, t_fractal *fractal);
 //cleanup
 int			close_handler(t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
-int			julia_track(int x, int y, t_fractal *fractal);
+// int			julia_track(int x, int y, t_fractal *fractal);
 
 
 
