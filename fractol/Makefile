@@ -6,7 +6,7 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2024/12/09 13:42:27 by asafrono         ###   ########.fr        #
+#    Updated: 2024/12/11 12:58:05 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ MLX_DIR = ./minilibx-linux
 SRC_DIR = obj
 OBJ_DIR = obj
 
-SRCS = main.c init.c render.c math_utils.c events.c 
+SRCS = main.c init.c render.c math_utils.c events.c render_julia.c \
+		render_burningships.c render_mandelbrot.c render_interesting.c   
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
