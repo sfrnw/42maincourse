@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/11 16:11:20 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:48:16 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,34 @@ typedef struct s_fractal
 	double	julia_y;
 	int		x;
 	int		y;
-	void	(*fractal_function)(int, int, struct s_fractal*);
 	int		color_shift;
 }	t_fractal;
 
 void		fractal_init(t_fractal *fractal);
 int			cycle(t_fractal *fractal);
 void		fractal_render(t_fractal *fractal);
-int			get_color(int iterations, t_fractal *fractal);
 void		calculate_fractal(t_complex z, t_complex c, t_fractal *fractal,
 				void (*transform)(t_complex*, t_complex*));
 void		mandelbrot_transform(t_complex *z, t_complex *c);
 void		handle_burning_ship(int x, int y, t_fractal *fractal);
 void		handle_julia(int x, int y, t_fractal *fractal);
 void		handle_mandelbrot(int x, int y, t_fractal *fractal);
-void		handle_interesting_fractal(int x, int y, t_fractal *fractal);
-double		map(double unscaled_num, double new_min, double new_max,
+double		map(double unscaled_num, double new_min,
 				double old_min, double old_max);
 t_complex	complex_add(t_complex a, t_complex b);
-t_complex	complex_square(t_complex z);
 t_complex	complex_i_pow(t_complex z);
 int			key_handler(int keysym, t_fractal *fractal);
 int			close_handler(t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
-void 		handle_mouse_zoom(int button, int mouse_x, int mouse_y, t_fractal *fractal);
-
+void		handle_mouse_zoom(int button, int mouse_x,
+				int mouse_y, t_fractal *fractal);
+void		handle_newton(int x, int y, t_fractal *fractal);
+int			get_color(int iterations, int max_iterations,
+				int color_shift, int root_index);
+void		render_newton_fractal(t_fractal *fractal);
+t_complex	complex_divide(t_complex a, t_complex b);
+t_complex	complex_subtract(t_complex a, t_complex b);
+t_complex	complex_multiply(t_complex a, t_complex b);
+void		my_pixel_put(int x, int y, t_img *img, int color);
 
 #endif

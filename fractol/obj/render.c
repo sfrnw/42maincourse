@@ -6,13 +6,14 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:47:45 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/11 16:12:16 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:33:40 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	my_pixel_put(int x, int y, t_img *img, int color)
+//	This function sets the color of a specific pixel in the image buffer. 
+void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;
 
@@ -20,6 +21,8 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
+//	This function performs the iterative calculation
+//	for a fractal at a given point. 
 void	calculate_fractal(t_complex z, t_complex c, t_fractal *fractal,
 			void (*transform)(t_complex*, t_complex*))
 {
@@ -32,7 +35,8 @@ void	calculate_fractal(t_complex z, t_complex c, t_fractal *fractal,
 		transform(&z, &c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
-			color = get_color(i, fractal);
+			color = get_color(i, fractal->iterations_definition,
+					fractal->color_shift, 0);
 			my_pixel_put(fractal->x, fractal->y, &fractal->img, color);
 			return ;
 		}
@@ -41,6 +45,8 @@ void	calculate_fractal(t_complex z, t_complex c, t_fractal *fractal,
 	my_pixel_put(fractal->x, fractal->y, &fractal->img, COLOR_BLACK);
 }
 
+//  This function determines which fractal calculation
+//	to use based on the selected fractal type. 
 static void	handle_pixel(int x, int y, t_fractal *fractal)
 {
 	if (!ft_strncmp(fractal->name, "julia", 5))
@@ -49,10 +55,12 @@ static void	handle_pixel(int x, int y, t_fractal *fractal)
 		handle_mandelbrot(x, y, fractal);
 	else if (!ft_strncmp(fractal->name, "burning_ship", 10))
 		handle_burning_ship(x, y, fractal);
-	else if (!ft_strncmp(fractal->name, "interesting", 11))
-		handle_interesting_fractal(x, y, fractal);
+	else if (!ft_strncmp(fractal->name, "newton", 6))
+		handle_newton(x, y, fractal);
 }
 
+//	This function renders the entire fractal by calculating the color
+//	for each pixel and displaying the resulting image.
 void	fractal_render(t_fractal *fractal)
 {
 	int	x;
@@ -67,32 +75,4 @@ void	fractal_render(t_fractal *fractal)
 	}
 	mlx_put_image_to_window(fractal->mlx_connection, fractal->mlx_window,
 		fractal->img.img_ptr, 0, 0);
-}
-
-int	get_color(int iterations, t_fractal *fractal)
-{
-	double	t;
-	int		shift;
-	int		r;
-	int		g;
-	int		b;
-
-	t = (double)iterations / fractal->iterations_definition;
-	shift = fractal->color_shift;
-	r = (int)((sin(t * 5 + shift * 0.1) * 0.5 + 0.5) * 255);
-	g = (int)((sin(t * 5 + shift * 0.1 + 2.094) * 0.5 + 0.5) * 255);
-	b = (int)((sin(t * 5 + shift * 0.1 + 4.188) * 0.5 + 0.5) * 255);
-	if (r < 0)
-		r = 0;
-	else if (r > 255)
-		r = 255;
-	if (g < 0)
-		g = 0;
-	else if (g > 255)
-		g = 255;
-	if (b < 0)
-		b = 0;
-	else if (b > 255)
-		b = 255;
-	return ((r << 16) | (g << 8) | b);
 }
