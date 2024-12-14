@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 15:58:25 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/13 18:53:45 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:21:14 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ static void	malloc_error(t_fractal *fractal)
 	close_handler(fractal);
 }
 
+// Julia
+// {"Classic", -0.7, 0.27015};
+// {"Dendrite", -0.8, 0.156};
+// {"Spiral", 0.285, 0.01};
+// {"Siegel Disk", -0.391, -0.587};
+// {"Rabbit", -0.123, 0.745}; 
+
 // This function initializes the fractal parameters with default values. 
 static void	data_init(t_fractal *fractal)
 {
@@ -29,8 +36,10 @@ static void	data_init(t_fractal *fractal)
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
 	fractal->color_shift = 0;
-	fractal->julia_x = -0.7;
-	fractal->julia_y = 0.27015;
+	if (!fractal->julia_x)
+		fractal->julia_x = 0.285;
+	if (!fractal->julia_y)
+		fractal->julia_x = 0.01;
 }
 
 //	 This function sets up event handlers for keyboard and mouse input. 
