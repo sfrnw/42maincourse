@@ -6,7 +6,7 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 11:38:14 by asafrono          #+#    #+#              #
-#    Updated: 2024/12/14 17:59:34 by asafrono         ###   ########.fr        #
+#    Updated: 2024/12/14 18:21:25 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ LIBFT_SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_utoa_base.c ft_utoa.c ft_putnbr_base.c ft_is_valid_number.c \
 		ft_isspace.c ft_qsort.c ft_atodbl.c
 
-PRINTF_SRCS = ft_printf/ft_printf.c ft_printf/handle_char.c ft_printf/handle_format.c \
-		ft_printf/handle_hex_lower.c ft_printf/handle_hex_upper.c ft_printf/handle_int.c \
-		ft_printf/handle_percent.c ft_printf/handle_pointer.c ft_printf/handle_string.c \
-		ft_printf/handle_unsigned.c
+PRINTF_SRCS = ft_printf.c handle_char.c handle_format.c \
+		handle_hex_lower.c handle_hex_upper.c handle_int.c \
+		handle_percent.c handle_pointer.c handle_string.c \
+		handle_unsigned.c
 
 SRCS = $(LIBFT_SRCS) $(PRINTF_SRCS)
 OBJS = $(SRCS:.c=.o)
