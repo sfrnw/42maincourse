@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:33:43 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/13 18:28:50 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:48:20 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 //	This function calculates the Julia set fractal
 //	for a given pixel coordinate. 
+//	z(n+1) = z(n)^2 + c;
+//	z(0) = coordinates:
+// {"Classic", -0.7, 0.27015};
+// {"Dendrite", -0.8, 0.156};
+// {"Spiral", 0.285, 0.01};
+// {"Siegel Disk", -0.391, -0.587};
+// {"Rabbit", -0.123, 0.745}; 
+
 void	handle_julia(int x, int y, t_fractal *fractal)
 {
 	t_complex	z;

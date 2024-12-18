@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:21 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/13 18:56:02 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:18:02 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,20 @@ int	key_handler(int keysym, t_fractal *fractal)
 		fractal->shift_y -= 0.5 * fractal->zoom;
 	else if (keysym == XK_Down)
 		fractal->shift_y += 0.5 * fractal->zoom;
-	else if (keysym == XK_m || keysym == XK_M)
-		ft_strlcpy(fractal->name, "mandelbrot", 11);
-	else if (keysym == XK_n || keysym == XK_N)
-		ft_strlcpy(fractal->name, "newton", 7);
-	else if (keysym == XK_j || keysym == XK_J)
-		ft_strlcpy(fractal->name, "julia", 6);
-	else if (keysym == XK_b || keysym == XK_B)
-		ft_strlcpy(fractal->name, "burning_ship", 13);
-	fractal_render(fractal);
-	return (0);
+	else if (keysym == XK_m || keysym == XK_n
+		|| keysym == XK_j || keysym == XK_b)
+	{
+		data_init(fractal);
+		if (keysym == XK_m)
+			fractal->name = "mandelbrot";
+		else if (keysym == XK_n)
+			fractal->name = "newton";
+		else if (keysym == XK_j)
+			fractal->name = "julia";
+		else if (keysym == XK_b)
+			fractal->name = "burning_ship";
+	}
+	return (fractal_render(fractal), 0);
 }
 
 //	This function handles mouse input. It allows zooming in and out using
@@ -62,16 +66,40 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 		fractal->zoom *= 0.95;
 	else if (button == Button1)
 	{
-		fractal->iterations_definition += 1;
-		if (fractal->iterations_definition > 100)
-			fractal->iterations_definition = 100;
+		fractal->iterations += 1;
+		if (fractal->iterations > 100)
+			fractal->iterations = 100;
 	}
 	else if (button == Button3)
 	{
-		fractal->iterations_definition -= 1;
-		if (fractal->iterations_definition < 1)
-			fractal->iterations_definition = 1;
+		fractal->iterations -= 1;
+		if (fractal->iterations < 1)
+			fractal->iterations = 1;
 	}
 	fractal_render(fractal);
+	return (0);
+}
+
+// This function is called repeatedly to create animation effects.
+// It gradually shifts colors and updates Julia set parameters over time. 
+int	cycle(t_fractal *fractal)
+{
+	static int	frame_count = 0;
+	static int	direction = 1;
+
+	frame_count++;
+	if (frame_count >= 60)
+	{
+		fractal->color_shift = (fractal->color_shift + 1) % 360;
+		fractal->julia_x += direction * 0.01;
+		fractal->julia_y += direction * 0.01;
+		if (fractal->julia_x >= 2.0 || fractal->julia_x <= -2.0
+			|| fractal->julia_y >= 2.0 || fractal->julia_y <= -2.0)
+		{
+			direction *= -1;
+		}
+		fractal_render(fractal);
+		frame_count = 0;
+	}
 	return (0);
 }

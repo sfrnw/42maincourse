@@ -6,7 +6,7 @@
 #    By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/27 17:18:15 by asafrono          #+#    #+#              #
-#    Updated: 2024/12/13 17:40:10 by asafrono         ###   ########.fr        #
+#    Updated: 2024/12/18 17:24:29 by asafrono         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = ./minilibx-linux
 
-SRC_DIR = obj
+SRC_DIR = src
 OBJ_DIR = obj
 
 SRCS = main.c init.c render.c math_utils.c events.c  color.c \

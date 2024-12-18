@@ -6,16 +6,18 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 14:41:16 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/13 18:56:03 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:28:55 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// f(z) = z^3 - 1
-//dfz =  f'(z) = 3z^2
+//	f(z) = z^3 - 1
+//	dfz =  f'(z) = 3z^2
+//	z(n+1) = z(n) - f(z)/dfz(n)
 //  This function applies the Newton fractal
 //	transformation to a complex number. 
+
 static void	newton_transform(t_complex *z)
 {
 	t_complex	fz;
@@ -56,16 +58,16 @@ void	handle_newton(int x, int y, t_fractal *fractal)
 	z.y = (map(y, 2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
 	i = 0;
 	root_index = -1;
-	while (i < fractal->iterations_definition && root_index == -1)
+	while (i < fractal->iterations && root_index == -1)
 	{
 		newton_transform(&z);
 		root_index = check_root(z);
 		i++;
 	}
 	if (root_index != -1)
-		color = get_color(i, fractal->iterations_definition,
+		color = get_color(i, fractal->iterations,
 				fractal->color_shift, root_index);
 	else
 		color = COLOR_BLACK;
-	my_pixel_put(x, y, &fractal->img, color);
+	pixel_put(x, y, &fractal->img, color);
 }

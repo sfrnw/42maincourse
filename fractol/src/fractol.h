@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:47:08 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/13 16:48:16 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:16:22 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_fractal
 	void	*mlx_window;
 	t_img	img;
 	double	escape_value;
-	int		iterations_definition;
+	int		iterations;
 	double	shift_x;
 	double	shift_y;
 	double	zoom;
@@ -92,6 +92,7 @@ void		render_newton_fractal(t_fractal *fractal);
 t_complex	complex_divide(t_complex a, t_complex b);
 t_complex	complex_subtract(t_complex a, t_complex b);
 t_complex	complex_multiply(t_complex a, t_complex b);
-void		my_pixel_put(int x, int y, t_img *img, int color);
+void		pixel_put(int x, int y, t_img *img, int color);
+void		data_init(t_fractal *fractal);
 
 #endif

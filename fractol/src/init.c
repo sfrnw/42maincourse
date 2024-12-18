@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 15:58:25 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/14 13:21:14 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:48:30 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,11 @@ static void	malloc_error(t_fractal *fractal)
 	close_handler(fractal);
 }
 
-// Julia
-// {"Classic", -0.7, 0.27015};
-// {"Dendrite", -0.8, 0.156};
-// {"Spiral", 0.285, 0.01};
-// {"Siegel Disk", -0.391, -0.587};
-// {"Rabbit", -0.123, 0.745}; 
-
 // This function initializes the fractal parameters with default values. 
-static void	data_init(t_fractal *fractal)
+void	data_init(t_fractal *fractal)
 {
 	fractal->escape_value = 4;
-	fractal->iterations_definition = 10;
+	fractal->iterations = 20;
 	fractal->shift_x = 0.0;
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
@@ -55,6 +48,7 @@ static void	events_init(t_fractal *fractal)
 
 //  This function initializes the fractal program by setting up the MLX library,
 //	creating a window, and initializing the image buffer. 
+
 void	fractal_init(t_fractal *fractal)
 {
 	fractal->mlx_connection = mlx_init();
@@ -79,26 +73,32 @@ void	fractal_init(t_fractal *fractal)
 	data_init(fractal);
 }
 
-// This function is called repeatedly to create animation effects.
-// It gradually shifts colors and updates Julia set parameters over time. 
-int	cycle(t_fractal *fractal)
-{
-	static int	frame_count = 0;
-	static int	direction = 1;
-
-	frame_count++;
-	if (frame_count >= 60)
-	{
-		fractal->color_shift = (fractal->color_shift + 1) % 360;
-		fractal->julia_x += direction * 0.01;
-		fractal->julia_y += direction * 0.01;
-		if (fractal->julia_x >= 2.0 || fractal->julia_x <= -2.0
-			|| fractal->julia_y >= 2.0 || fractal->julia_y <= -2.0)
-		{
-			direction *= -1;
-		}
-		fractal_render(fractal);
-		frame_count = 0;
-	}
-	return (0);
-}
+//mlx_init():
+// This function initializes the MLX library and establishes a connection to
+// the X server. It returns a void pointer that serves as the MLX connection 
+// identifier, which is necessary for subsequent MLX function call
+//mlx_new_window(...):
+// This function creates a new window on the screen. It takes four parameters:
+//     The MLX connection identifier
+//     The width of the window
+//     The height of the window
+//     The title of the window
+//     It returns a pointer to the newly created window
+// mlx_destroy_display(...):
+//     This function is called if window creation fails. It cleans up the MLX 
+//     connection and frees associated resources
+//mlx_new_image(fractal->mlx_connection, WIDTH, HEIGHT):
+// This function creates a new image in memory. It takes three parameters:
+//     The MLX connection identifier
+//     The width of the image
+//     The height of the image
+//     It returns a pointer to the new image
+// mlx_get_data_addr():
+// This function retrieves information about the created image.
+// It takes four parameters:
+//     The image pointer
+//     A pointer to store the bits per pixel
+//     A pointer to store the size of a line in bytes
+//     A pointer to store the endian information
+// It returns the memory address of the image data, allowing direct
+// pixel manipulation
