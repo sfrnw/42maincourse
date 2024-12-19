@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:53:16 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/18 16:17:49 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:32:10 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	validate_arguments(int argc, char **argv, t_fractal *fractal)
 int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
-
+	ft_memset(&fractal, 0, sizeof(&fractal));
 	if (validate_arguments(argc, argv, &fractal))
 	{
 		fractal.name = argv[1];

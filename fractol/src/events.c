@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:21 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/18 16:18:02 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:30:16 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 int	cycle(t_fractal *fractal)
 {
 	static int	frame_count = 0;
-	static int	direction = 1;
+	static int	direction = 5;
 
 	frame_count++;
 	if (frame_count >= 60)

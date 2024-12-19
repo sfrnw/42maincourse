@@ -6,7 +6,7 @@
 /*   By: asafrono <asafrono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 15:58:25 by asafrono          #+#    #+#             */
-/*   Updated: 2024/12/18 16:48:30 by asafrono         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:32:12 by asafrono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	data_init(t_fractal *fractal)
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
 	fractal->color_shift = 0;
+	fractal->x = 0;
+	fractal->y = 0;
 	if (!fractal->julia_x)
 		fractal->julia_x = 0.285;
 	if (!fractal->julia_y)
@@ -52,7 +54,7 @@ static void	events_init(t_fractal *fractal)
 void	fractal_init(t_fractal *fractal)
 {
 	fractal->mlx_connection = mlx_init();
-	if (NULL == fractal->mlx_connection)
+	if (fractal->mlx_connection == NULL)
 		malloc_error(fractal);
 	fractal->mlx_window = mlx_new_window(fractal->mlx_connection,
 			WIDTH, HEIGHT, fractal->name);
